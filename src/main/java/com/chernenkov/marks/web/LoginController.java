@@ -21,7 +21,8 @@ import java.io.IOException;
 @Controller
 public class LoginController {
 
-    public static final String REDIRECT_URL = "/statusClient?id=";
+//    TODO:move to common class
+    public static final String REDIRECT_URL = "/marks/groups";
     public static final String DEPLOYMENT_URL = "/marks";
 
     @Autowired

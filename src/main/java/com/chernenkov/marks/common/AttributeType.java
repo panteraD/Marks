@@ -1,6 +1,7 @@
 package com.chernenkov.marks.common;
 
 public class  AttributeType {
+//    TODO: дублировать атрибуты (14 штук)
     public static final int E_MAIL = 1;
     public static final int ADDRESS = 2;
     public static final int PATH_TO_IMAGE = 3;

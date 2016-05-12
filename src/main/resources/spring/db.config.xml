@@ -21,9 +21,14 @@
               <property name="dataSource" ref="dataSource"/>
               <property name="annotatedClasses">
                      <list>
-                            <value>com.chernenkov.marks.domain.User</value>
-                            <value>com.chernenkov.marks.domain.Param</value>
-                            <value>com.chernenkov.marks.domain.Attribute</value>
+                            <value>com.chernenkov.marks.domain.Discipline</value>
+                            <value>com.chernenkov.marks.domain.DisciplineParam</value>
+                            <value>com.chernenkov.marks.domain.DisciplineSemestr</value>
+                            <value>com.chernenkov.marks.domain.Group</value>
+                            <value>com.chernenkov.marks.domain.Speciality</value>
+                            <value>com.chernenkov.marks.domain.Student</value>
+                            <value>com.chernenkov.marks.domain.StudentDisciplineSemestr</value>
+                            <value>com.chernenkov.marks.domain.Teacher</value>
                             <value>com.chernenkov.marks.domain.Role</value>
                      </list>
               </property>
@@ -36,22 +41,15 @@
               </property>
        </bean>
 
-       <bean id="userDao" class="com.chernenkov.marks.dao.UserDaoImpl">
+       <!--TODO:add all beans-->
+       <bean id="groupDAO" class="com.chernenkov.marks.dao.GroupDAOImpl">
               <property name="sessionFactory" ref="hibernate4SessionFactory"/>
        </bean>
 
-       <bean id="userService" class="com.chernenkov.marks.service.UserServiceImpl">
-              <property name="userDao" ref="userDao"/>
-              <property name="paramDao" ref="paramDao"/>
+       <bean id="groupService" class="com.chernenkov.marks.service.GroupServiceImpl">
+              <property name="groupDAO" ref="groupDAO"/>
        </bean>
 
-       <bean id="paramDao" class="com.chernenkov.marks.dao.ParamDaoImpl">
-              <property name="sessionFactory" ref="hibernate4SessionFactory"/>
-              <property name="userDao" ref="userDao"/>
-       </bean>
-
-       <bean id="paramService" class="com.chernenkov.marks.service.ParamServiceImpl">
-              <property name="paramDao" ref="paramDao"/>
-       </bean>
+       <!--add properties-->
 
 </beans>

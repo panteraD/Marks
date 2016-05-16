@@ -4,91 +4,58 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Person Page</title>
-    <style type="text/css">
-        .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-        .tg .tg-4eph{background-color:#f9f9f9}
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+    <title>Users List</title>
+    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
+    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
 </head>
+
 <body>
-<h1>
-    Add a Person
-</h1>
-
-<c:url var="addAction" value="/group/add" ></c:url>
-
-<form:form action="${addAction}" commandName="group">
-    <table>
-        <c:if test="${!empty group.faculty}">
+<div class="generic-container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">List of Groups </span></div>
+        <table class="table table-hover">
+            <%--Declare headers--%>
+            <thead>
             <tr>
-                <td>
-                    <form:label path="id">
-                        <spring:message text="ID"/>
-                    </form:label>
-                </td>
-                <td>
-                    <form:input path="id" readonly="true" size="8"  disabled="true" />
-                    <form:hidden path="id" />
-                </td>
+                <th>id</th>
+                <th>speciality</th>
+                <th>course</th>
+                <th>group number</th>
+                <th>faculty</th>
+                <th width="100"></th>
+                <th width="100"></th>
             </tr>
-        </c:if>
-        <tr>
-            <td>
-                <form:label path="course">
-                    <spring:message text="Course"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="course" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="groupNumber">
-                    <spring:message text="groupNumber"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="groupNumber" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <c:if test="${!empty group.faculty}">
-                    <input type="submit"
-                           value="<spring:message text="Edit group"/>" />
-                </c:if>
-                <c:if test="${empty group.course}">
-                    <input type="submit"
-                           value="<spring:message text="Add group"/>" />
-                </c:if>
-            </td>
-        </tr>
-    </table>
-</form:form>
-<br>
-<h3>Persons List</h3>
-<c:if test="${!empty listPersons}">
-    <table class="tg">
-        <tr>
-            <th width="80">group ID</th>
-            <th width="120">course</th>
-            <th width="120">group number</th>
-            <th width="60">Edit</th>
-            <th width="60">Delete</th>
-        </tr>
-        <c:forEach items="${listGroups}" var="group">
-            <tr>
-                <td>${group.id}</td>
-                <td>${group.course}</td>
-                <td>${group.groupNumber}</td>
-                <td><a href="<c:url value='/edit/${group.id}' />" >Edit</a></td>
-                <td><a href="<c:url value='/remove/${group.id}' />" >Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
+            </thead>
+            <tbody>
+            <c:forEach items="${groups}" var="group">
+                <tr>
+                    <td>${group.id}</td>
+                    <td>${group.speciality.specialityName}</td>
+                    <td>${group.course}</td>
+                    <td>${group.groupNumber}</td>
+                    <td>${group.faculty}</td>
+
+                    <td><a href="<c:url value='/edit-user-${group.id}' />"
+                           class="btn btn-success custom-width">edit</a>
+                    </td>
+
+
+                    <td><a href="<c:url value='/delete-group-${group.id}' />"
+                           class="btn btn-danger custom-width">delete</a>
+                    </td>
+
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <%--<sec:authorize access="hasRole('ADMIN')">--%>
+    <div class="well">
+        <a href="<c:url value='/newuser' />">Add New User</a>
+    </div>
+    <%--</sec:authorize>--%>
+</div>
 </body>
 </html>

@@ -8,13 +8,19 @@
        http://www.springframework.org/schema/security/spring-security.xsd">
 
 
+    <!--creates a Servlet Filter known as the springSecurityFilterChain which is responsible
+    for all the security (protecting the application URLs,
+    validating submitted username and passwords, redirecting to the log in form, etc) within  application.-->
     <security:http auto-config="true" use-expressions="true">
         <!--TODO: ????-->
+        <security:intercept-url pattern="/" access="permitAll"/>
         <security:intercept-url pattern="/marks/**" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/redirect" access="hasRole('ROLE_USER')"/>
+        <!--default-target-url="/redirect"-->
+        <!--default-target-url="/management"-->
         <security:form-login
             login-page="/login"
-            default-target-url="/redirect"
+
             authentication-failure-url="/login?error"
             username-parameter="username"
             password-parameter="password"/>
@@ -31,8 +37,8 @@
             <!--TODO check this-->
             <!--<security:password-encoder ref="encoder"/>-->
             <security:jdbc-user-service data-source-ref="dataSource"
-                      users-by-username-query="SELECT login, password, enabled FROM shema.teachers WHERE login=?"
-                      authorities-by-username-query="SELECT login, roles.role_name FROM shema.teachers, shema.roles WHERE login=?"/>
+                      users-by-username-query="SELECT login, password, enabled FROM sheet.teachers WHERE login=?"
+                      authorities-by-username-query="SELECT login, roles.role_name FROM sheet.teachers, sheet.roles WHERE login=?"/>
         </security:authentication-provider>
     </security:authentication-manager>
 

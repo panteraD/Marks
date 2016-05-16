@@ -2,8 +2,10 @@ package com.chernenkov.marks.dao;
 
 
 import com.chernenkov.marks.domain.Group;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,16 +31,25 @@ public class GroupDAOImpl extends AbstractDao implements GroupDAO {
         logger.info("Group updated successfully, details:" + group);
     }
 
+
+//    @Override
+//    @SuppressWarnings("unchecked")
+//    public List<User> getAllUsers() {
+//        Session session = getSessionFactory().openSession();
+//        return session.createCriteria(User.class).list();
+//    }
+
     @SuppressWarnings("unchecked")
     public List<Group> getGroupList() {
         Session session = getSessionFactory().openSession();
-        List<Group> groupList = session.createQuery("from Group").list();
-        for(Group group: groupList){
-            logger.info("Group list"+group);
-        }
-        session.close();
+        Criteria criteria = session.createCriteria(Group.class);
+        List<Group> groupList = (List<Group>) criteria.list();
+
         return groupList;
+
     }
+
+
 
     public Group getGroup(int id) {
         Session session = getSessionFactory().openSession();

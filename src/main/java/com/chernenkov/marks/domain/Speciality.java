@@ -55,4 +55,9 @@ public class Speciality {
     public void setSpecialityName(String specialityName) {
         this.specialityName = specialityName;
     }
+
+    @Override
+    public String toString() {
+        return specialityName;
+    }
 }

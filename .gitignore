@@ -3,5 +3,8 @@
 *.iml
 *.backup
 target/*
+web/WEB-INF/classes
+web/WEB-INF/lib
+
 scripts/dump.tar.gz
 RegisterServer/src/main/resources/hibernate/hibernate.properties
